@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <title>lab7</title>
+</head>
+<body>
+    <script>
+        let balance = 0;
+
+        // 1. nuuts ug 
+        while (true) {
+            let password = prompt("Нууц үгээ оруулна уу:");
+            
+            if (password === null || password.trim() === "") {
+                alert("Алдаа: Хоосон утга оруулж болохгүй!");
+            } else if (password.trim() === "123") {
+                alert("Амжилттай нэвтэрлээ!");
+                break;
+            } else {
+                alert("Алдаа: Нууц үг буруу байна. Дахин оролдоно уу!");
+            }
+        }
+
+        // 2. Сонголтын цонх
+        while (true) {
+            let choice = prompt(
+                "Сонголтоо оруулна уу:\n" +
+                "1 - Орлого оруулах\n" +
+                "2 - Зарлага гаргах (100₮ шимтгэлтэй)\n" +
+                "3 - Дансны үлдэгдэл\n" +
+                "4 - Гарах"
+            );
+
+            // 3. utga shalgah
+            if (choice === null || choice.trim() === "") {
+                alert("Алдаа: Хоосон утга оруулж болохгүй!");
+                continue;
+            }
+
+            choice = choice.trim();
+
+            if (choice === "1") {
+                let input = prompt("Орлогын дүнг оруулна уу:");
+                if (input === null || input.trim() === "") {
+                    alert("Алдаа: Хоосон утга оруулж болохгүй!");
+                    continue;
+                }
+                let amount = Number(input);
+                if (isNaN(amount) || amount <= 0) {
+                    alert("Алдаа: Зөв мөнгөн дүн оруулна уу!");
+                    continue;
+                }
+                balance += amount;
+                alert(`Амжилттай: ${amount}₮ орлого орлоо.\nОдоогийн үлдэгдэл: ${balance}₮`);
+
+            } else if (choice === "2") {
+                let input = prompt("Зарлагын дүнг оруулна уу:");
+                if (input === null || input.trim() === "") {
+                    alert("Алдаа: Хоосон утга оруулж болохгүй!");
+                    continue;
+                }
+                let amount = Number(input);
+                if (isNaN(amount) || amount <= 0) {
+                    alert("Алдаа: Зөв мөнгөн дүн оруулна уу!");
+                    continue;
+                }
+
+                // 4. shimtgel shalgah 
+                let fee = 100;
+                let total = amount + fee;
+
+                if (total > balance) {
+                    alert(`Алдаа: Дансны үлдэгдэл хүрэлцэхгүй байна!\nНийт шаардлагатай: ${total}₮ (100₮ шимтгэл орсон)\nТаны үлдэгдэл: ${balance}₮`);
+                } else {
+                    balance -= total;
+                    alert(`Амжилттай: ${amount}₮ зарлага гарлаа (+100₮ шимтгэл).\nҮлдэгдэл: ${balance}₮`);
+                }
+
+            } else if (choice === "3") {
+                alert(`Таны дансны үлдэгдэл: ${balance}₮`);
+
+            } else if (choice === "4") {
+                alert("Системээс гарлаа.");
+                break;
+
+            } else {
+                alert("Алдаа: Зөвхөн 1-4 хооронд сонголт хийнэ үү!");
+            }
+        }
+    </script>
+</body>
+</html>
